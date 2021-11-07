@@ -1,30 +1,30 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Calendar Examples
-    </ion-title>
+    <ion-title> Ionic Calendar Examples </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- <div class="ion-padding">
-
-    <ion-calendar [(ngModel)]="date"
-      (onChange)="onChange($event)"
-      [type]="type"
-      [format]="'YYYY-MM-DD'">
-    </ion-calendar>
-
-  </div> -->
   <div class="ion-padding">
+    <!-- <ion-calendar (change)="onChange($event)" [(ngModel)]="date" [type]="type" [format]="'YYYY-MM-DD'">
+    </ion-calendar> -->
 
-    <ion-calendar 
-       (change)="onChange($event)" 
-       [(ngModel)]="date" 
-       [type]="type" 
-       [format]="'YYYY-MM-DD'">
+    <ion-calendar
+      (change)="onChange($event)"
+      [(ngModel)]="dateMulti"
+      [options]="optionsMulti"
+      [type]="type"
+      [format]="'YYYY-MM-DD'"
+    >
     </ion-calendar>
 
+    <!-- <ion-calendar
+      (change)="onChange($event)"
+      [(ngModel)]="dateRange"
+      [type]="type"
+      [options]="optionsRange"
+      [format]="'YYYY-MM-DD'"
+    >
+    </ion-calendar> -->
   </div>
 </ion-content>
-
