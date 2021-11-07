@@ -29,8 +29,14 @@ export class HomePage {
 
   async calendarModal() {
     const options: CalendarModalOptions = {
-      pickMode: 'range',
-      title: 'Range Date',
+      // pickMode: 'range',
+      pickMode: 'multi',
+      title: 'Multiple Dates',
+      monthFormat: 'YYYY 年 MM 月 ',
+      weekdays: ['日', '一', '二', '三', '四', '五', '六'],
+      weekStart: 1,
+      color:'danger',
+      // defaultDate: {new Date()}
     };
 
     let calendarUi = await this.modalController.create({

@@ -27,13 +27,10 @@
     >
     </ion-calendar> -->
 
-    <ion-calendar [(ngModel)]="dateRange"
-        [options]="optionsRange"
-        [type]="type"
-        [format]="'YYYY-MM-DD'">
-    </ion-calendar>
+    <ion-button expand="block" (click)="calendarModal()">Open Calendar</ion-button>
+
+
   </div>
 
-  <ion-button expand="block" (click)="calendarModal()">Open Calendar</ion-button>
-  
+
 </ion-content>
