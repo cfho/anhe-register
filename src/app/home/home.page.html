@@ -9,14 +9,14 @@
     <!-- <ion-calendar (change)="onChange($event)" [(ngModel)]="date" [type]="type" [format]="'YYYY-MM-DD'">
     </ion-calendar> -->
 
-    <ion-calendar
+    <!-- <ion-calendar
       (change)="onChange($event)"
       [(ngModel)]="dateMulti"
       [options]="optionsMulti"
       [type]="type"
       [format]="'YYYY-MM-DD'"
     >
-    </ion-calendar>
+    </ion-calendar> -->
 
     <!-- <ion-calendar
       (change)="onChange($event)"
@@ -26,5 +26,14 @@
       [format]="'YYYY-MM-DD'"
     >
     </ion-calendar> -->
+
+    <ion-calendar [(ngModel)]="dateRange"
+        [options]="optionsRange"
+        [type]="type"
+        [format]="'YYYY-MM-DD'">
+    </ion-calendar>
   </div>
+
+  <ion-button expand="block" (click)="calendarModal()">Open Calendar</ion-button>
+  
 </ion-content>
