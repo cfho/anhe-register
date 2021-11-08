@@ -1,13 +1,17 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button menu="m1"></ion-menu-button>
+      <ion-back-button defaultHref="/home/tabs/person-list"></ion-back-button>
     </ion-buttons>
     <ion-title>Add list</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <div class="ion-padding">
+    <ion-button expand="block" (click)="calendarModal()"
+      >Open Calendar</ion-button
+    >
+  </div>
 </ion-content>
 
