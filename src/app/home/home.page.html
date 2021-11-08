@@ -1,36 +1,23 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title> Ionic Calendar Examples </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="info">
+      <ion-icon name="search"></ion-icon>
+      <ion-label>公告</ion-label>
+    </ion-tab-button>
 
-<ion-content>
-  <div class="ion-padding">
-    <!-- <ion-calendar (change)="onChange($event)" [(ngModel)]="date" [type]="type" [format]="'YYYY-MM-DD'">
-    </ion-calendar> -->
+    <ion-tab-button tab="person-list">
+      <ion-icon name="card"></ion-icon>
+      <ion-label>個人</ion-label>
+    </ion-tab-button>
 
-    <!-- <ion-calendar
-      (change)="onChange($event)"
-      [(ngModel)]="dateMulti"
-      [options]="optionsMulti"
-      [type]="type"
-      [format]="'YYYY-MM-DD'"
-    >
-    </ion-calendar> -->
+    <ion-tab-button tab="all-list">
+      <ion-icon name="card"></ion-icon>
+      <ion-label>全體</ion-label>
+    </ion-tab-button>
 
-    <!-- <ion-calendar
-      (change)="onChange($event)"
-      [(ngModel)]="dateRange"
-      [type]="type"
-      [options]="optionsRange"
-      [format]="'YYYY-MM-DD'"
-    >
-    </ion-calendar> -->
-
-    <ion-button expand="block" (click)="calendarModal()">Open Calendar</ion-button>
-
-
-  </div>
-
-
-</ion-content>
+    <ion-tab-button tab="person-list">
+      <ion-icon name="card"></ion-icon>
+      <ion-label>接送</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
