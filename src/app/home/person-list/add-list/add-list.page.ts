@@ -24,9 +24,9 @@ export class AddListPage implements OnInit {
   selectedDate;
 
   form = this.fb.group({
-    dates: [''],
-    pickUpLocation: ['', Validators.required],
-    dropDownLocation: ['', Validators.required],
+    dates: ['', Validators.required],
+    pickUpLocation: [''],
+    dropDownLocation: [''],
     transportation: [''],
     carNumber: [''],
   });
@@ -63,19 +63,19 @@ export class AddListPage implements OnInit {
     const event: any = await calendarUi.onDidDismiss();
     const date: CalendarResult = event.data;
     this.selectedDate = date;
+    this.form.patchValue({dates: this.selectedDate})
     console.log(date);
     console.log(event);
   }
 
   onSubmit() {
-    this.form.patchValue({dates: this.selectedDate})
     if(this.form.value.transportation === '自行上山') {
       this.form.patchValue({dropDownLocation: '', pickUpLocation: ''})
     } else {
       this.form.patchValue({carNumber: ''})
     }
-    this.afService.update(this.form.value);
-    console.log("reactive form submitted");
     console.log(this.form.value);
+    this.afService.add(this.form.value);
+    console.log("reactive form submitted");
 }
 }

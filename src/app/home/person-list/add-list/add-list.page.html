@@ -8,10 +8,6 @@
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    <ion-button expand="block" (click)="calendarModal()">出坡日期</ion-button>
-  </div>
-
   <ion-list>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <ion-radio-group formControlName="transportation">
@@ -36,11 +32,18 @@
         </ion-grid>
       </ion-radio-group>
 
+      <div class="ion-padding" *ngIf="form.value.transportation !== ''">
+        <ion-button expand="block" (click)="calendarModal()"
+          >出坡日期</ion-button
+        >
+      </div>
 
-      <ion-list-header *ngIf="form.value.transportation !== ''" >
-        <ion-label> {{ form.value.transportation ==='搭義工車'? '搭義工車':'自行上山'}} </ion-label>
+      <ion-list-header *ngIf="form.value.transportation !== ''">
+        <ion-label>
+          {{ form.value.transportation ==='搭義工車'? '搭義工車':'自行上山'}}
+        </ion-label>
       </ion-list-header>
-      
+
       <div *ngIf="form.value.transportation === '搭義工車'">
         <ion-item color="primary">
           <ion-label>上車地點</ion-label>
@@ -48,12 +51,11 @@
             placeholder="上車地點"
             okText="確認"
             cancelText="取消"
-            ion-select interface="action-sheet"
+            ion-select
+            interface="action-sheet"
             formControlName="pickUpLocation"
           >
-            <ion-select-option
-              *ngFor="let pu of pickUp$ | async"
-              [value]="pu"
+            <ion-select-option *ngFor="let pu of pickUp$ | async" [value]="pu"
               >{{pu}}</ion-select-option
             >
           </ion-select>
@@ -65,12 +67,11 @@
             placeholder="下車地點"
             okText="確認"
             cancelText="取消"
-            ion-select interface="action-sheet"
+            ion-select
+            interface="action-sheet"
             formControlName="dropDownLocation"
           >
-            <ion-select-option
-              *ngFor="let dd of dropDown$ | async"
-              [value]="dd"
+            <ion-select-option *ngFor="let dd of dropDown$ | async" [value]="dd"
               >{{dd}}</ion-select-option
             >
           </ion-select>
@@ -85,11 +86,17 @@
       </div>
 
       <div class="ion-text-right ion-padding">
-        <ion-button fill="clear" color="primary" type="submit">
+        <ion-button
+          fill="clear"
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
           提交
         </ion-button>
       </div>
     </form>
   </ion-list>
   <!-- <p>{{form.value | json}}</p> -->
+  <!-- <p>{{form.valid }}</p> -->
 </ion-content>
