@@ -5,14 +5,14 @@ import {
   CalendarModalOptions,
 } from 'ion2-calendar';
 import { ModalController } from '@ionic/angular';
-
+import { AfService } from 'src/app/af.service';
 
 @Component({
   selector: 'app-add-list',
   templateUrl: './add-list.page.html',
   styleUrls: ['./add-list.page.scss'],
 })
-export class AddListPage {
+export class AddListPage implements OnInit{
   type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
   dateRange: { from: string; to: string };
   dateMulti: string[];
@@ -27,6 +27,19 @@ export class AddListPage {
     weekStart: 1,
     // defaultDate: {new Date()}
   };
+
+  pickUp;
+  dropDown;
+
+  constructor(
+    public modalController: ModalController,
+    private afService: AfService
+  ) {}
+
+  ngOnInit(): void {
+    this.pickUp = this.afService.pickUpLocation;
+    this.dropDown = this.afService.dropOffLocation;
+  }
 
   async calendarModal() {
     const options: CalendarModalOptions = {
@@ -47,9 +60,4 @@ export class AddListPage {
 
     calendarUi.present();
   }
-
-  constructor(public modalController: ModalController) {}
-
-  
-  
 }
