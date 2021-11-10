@@ -9,6 +9,7 @@ import {
 import { ModalController } from '@ionic/angular';
 import { AfService } from 'src/app/af.service';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-list',
@@ -17,11 +18,9 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 })
 export class AddListPage implements OnInit {
   type: 'string'; // 'string' | 'js-date' | 'moment' | 'time' | 'object'
-  dateRange: { from: string; to: string };
-  dateMulti: string[];
 
-  pickUp;
-  dropDown;
+  pickUp$;
+  dropDown$: Observable<string[]>;
   selectedDate;
 
   form = this.fb.group({
@@ -39,8 +38,9 @@ export class AddListPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.pickUp = this.afService.pickUpLocation;
-    this.dropDown = this.afService.dropOffLocation;
+    this.dropDown$ = this.afService.dropDown$;
+    this.pickUp$ = this.afService.pickUp$;
+    // this.pickUp$.subscribe(data => console.log(data))
   }
 
   async calendarModal() {

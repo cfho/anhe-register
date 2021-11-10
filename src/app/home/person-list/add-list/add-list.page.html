@@ -52,7 +52,7 @@
             formControlName="pickUpLocation"
           >
             <ion-select-option
-              *ngFor="let pu of pickUp"
+              *ngFor="let pu of pickUp$ | async"
               [value]="pu"
               >{{pu}}</ion-select-option
             >
@@ -69,7 +69,7 @@
             formControlName="dropDownLocation"
           >
             <ion-select-option
-              *ngFor="let dd of dropDown"
+              *ngFor="let dd of dropDown$ | async"
               [value]="dd"
               >{{dd}}</ion-select-option
             >
