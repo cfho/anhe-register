@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "anhe-86c1c": {
+      "hosting": {
+        "app": [
+          "anhe-register"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "anhe-86c1c"
+  }
+}
