@@ -13,5 +13,43 @@
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>掛單行程</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let list of listWithStay$ | async">
+      <ion-label>
+        
+        <h2>{{list.transportation}}</h2>
+        <ng-container *ngIf="list.transportation !== '自行上山';else other">
+          <h3>上車地點：{{list.pickUpLocation}}</h3>
+          <h3>下車地點：{{list.dropDownLocation}}</h3>
+        </ng-container>
+        <ng-template #other>
+          <h3>車牌號碼：{{list.carNumber}}</h3>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>當日行程</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let list of listNoStay$ | async">
+      <!-- <ion-thumbnail slot="start">
+        <ion-img [src]="place.imageUrl"></ion-img>
+      </ion-thumbnail> -->
+      <ion-label>
+        <h2>{{list.transportation}}</h2>
+        <ng-container *ngIf="list.transportation !== '自行上山';else other">
+          <h3>上車地點：{{list.pickUpLocation}}</h3>
+          <h3>下車地點：{{list.dropDownLocation}}</h3>
+        </ng-container>
+        <ng-template #other>
+          <h3>車牌號碼：{{list.carNumber}}</h3>
+        </ng-template>
+      </ion-label>
+    </ion-item>
+  </ion-list>
   
 </ion-content>

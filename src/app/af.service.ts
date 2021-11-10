@@ -1,12 +1,13 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, shareReplay } from 'rxjs/operators';
 // import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+import { Regist } from './regist';
 
 @Injectable({
   providedIn: 'root',
@@ -37,23 +38,30 @@ export class AfService implements OnInit {
   pickUp$: Observable<string[]>;
   private itemDoc: AngularFirestoreDocument<string>;
 
-  constructor(private afs: AngularFirestore) {
-    // this.pickUp$ = doc(firestore, 'register/pickUpLocation');+
-    // this.doc = doc(firestore, 'register/dropDownLocation');
-    // docData(this.doc).subscribe(data => console.log(data));
-    // this.itemDoc = afs.doc<string>('register/dropDownLocation');
+  constructor(private afs: AngularFirestore) {}
+
+  ngOnInit(): void {
     this.dropDown$ = this.afs
       .doc<string[]>('register/dropDownLocation')
-      .valueChanges()
+      .valueChanges({ idField: 'id' })
       .pipe(map((obj) => Object.values(obj)));
     this.pickUp$ = this.afs
       .doc<string[]>('register/pickUpLocation')
       .valueChanges({ idField: 'id' })
-      .pipe(tap(console.log),map((obj) => Object.values(obj)));
+      .pipe(
+        tap(console.log),
+        map((obj) => Object.values(obj))
+      );
   }
 
-  ngOnInit(): void {
-    this.dropDown$.subscribe((data) => console.log(data));
-    this.pickUp$.subscribe((data) => console.log(data));
+  update(data: Object) {
+    this.afs.doc('register/users/person1/date3').set(data);
+  }
+
+  getPersonData() {
+    return this.afs
+      .collection<Regist>('register/users/person1')
+      .valueChanges({ idField: 'id' })
+      .pipe(shareReplay());
   }
 }

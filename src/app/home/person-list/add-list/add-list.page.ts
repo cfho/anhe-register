@@ -74,6 +74,7 @@ export class AddListPage implements OnInit {
     } else {
       this.form.patchValue({carNumber: ''})
     }
+    this.afService.update(this.form.value);
     console.log("reactive form submitted");
     console.log(this.form.value);
 }
