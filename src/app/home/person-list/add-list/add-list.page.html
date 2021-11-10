@@ -9,54 +9,68 @@
 
 <ion-content>
   <div class="ion-padding">
-    <ion-button expand="block" (click)="calendarModal()"
-      >出坡日期</ion-button
-    >
-  </div>
-
-  <div class="ion-padding">
-    <ion-button expand="block" (click)="calendarModal()"
-      >是否掛單</ion-button
-    >
+    <ion-button expand="block" (click)="calendarModal()">出坡日期</ion-button>
   </div>
 
   <ion-list>
-    <ion-list-header>
-      <ion-label> 搭乘義工車 </ion-label>
-    </ion-list-header>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <ion-list-header>
+        <ion-label> 搭乘義工車 </ion-label>
+      </ion-list-header>
 
-    <ion-item color="primary">
-      <ion-label>上車地點</ion-label>
-      <ion-select placeholder="上車地點" okText="確認" cancelText="取消">
-        <ion-select-option
-          *ngFor="let pu of pickUp"
+      <ion-item color="primary">
+        <ion-label>上車地點</ion-label>
+        <ion-select
           placeholder="上車地點"
-          [value]="pu"
-          >{{pu}}</ion-select-option
+          okText="確認"
+          cancelText="取消"
+          formControlName="pickUpLocation"
         >
-      </ion-select>
-    </ion-item>
+          <ion-select-option
+            *ngFor="let pu of pickUp"
+            placeholder="上車地點"
+            [value]="pu"
+            >{{pu}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
 
-    <ion-item color="danger">
-      <ion-label>下車地點</ion-label>
-      <ion-select placeholder="下車地點" okText="確認" cancelText="取消">
-        <ion-select-option
-          *ngFor="let dd of dropDown"
-          placeholder="上車地點"
-          [value]="dd"
-          >{{dd}}</ion-select-option
+      <ion-item color="danger">
+        <ion-label>下車地點</ion-label>
+        <ion-select
+          placeholder="下車地點"
+          okText="確認"
+          cancelText="取消"
+          formControlName="dropDownLocation"
         >
-      </ion-select>
-    </ion-item>
+          <ion-select-option
+            *ngFor="let dd of dropDown"
+            placeholder="上車地點"
+            [value]="dd"
+            >{{dd}}</ion-select-option
+          >
+        </ion-select>
+      </ion-item>
+
+      <ion-list-header>
+        <ion-label>自行上山</ion-label>
+        <ion-input></ion-input>
+      </ion-list-header>
+      <ion-item>
+        <ion-label position="floating">請輸入車牌號碼</ion-label>
+          <ion-input formControlName="carNumber"></ion-input>
+      </ion-item>
+
+      <div class="ion-text-right ion-padding">
+        <ion-button
+          fill="clear"
+          color="primary"
+          type="submit"
+          [disabled]="!form.valid"
+        >
+          提交
+        </ion-button>
+      </div>
+    </form>
   </ion-list>
-
-  <ion-list-header>
-    <ion-label>自行上山</ion-label>
-    <ion-input></ion-input>
-  </ion-list-header>
-  <ion-item>
-    <ion-label position="floating">請輸入車牌號碼</ion-label>
-    <ion-input></ion-input>
-  </ion-item>
-
 </ion-content>
