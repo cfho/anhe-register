@@ -69,6 +69,11 @@ export class AddListPage implements OnInit {
 
   onSubmit() {
     this.form.patchValue({dates: this.selectedDate})
+    if(this.form.value.transportation === '自行上山') {
+      this.form.patchValue({dropDownLocation: '', pickUpLocation: ''})
+    } else {
+      this.form.patchValue({carNumber: ''})
+    }
     console.log("reactive form submitted");
     console.log(this.form.value);
 }
