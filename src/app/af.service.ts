@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap, shareReplay } from 'rxjs/operators';
+import { map, tap, shareReplay, take } from 'rxjs/operators';
 // import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import {
   AngularFirestore,
@@ -38,23 +38,27 @@ export class AfService implements OnInit {
   pickUp$: Observable<string[]>;
   private itemDoc: AngularFirestoreDocument<string>;
 
-  constructor(private afs: AngularFirestore) {}
-
-  ngOnInit(): void {
+  constructor(private afs: AngularFirestore) {
     this.dropDown$ = this.afs
       .doc<string[]>('register/dropDownLocation')
-      .valueChanges({ idField: 'id' })
-      .pipe(map((obj) => Object.values(obj)));
+      .valueChanges()
+      .pipe(
+        shareReplay(),
+        map((obj) => Object.values(obj))
+      );
     this.pickUp$ = this.afs
       .doc<string[]>('register/pickUpLocation')
-      .valueChanges({ idField: 'id' })
+      .valueChanges()
       .pipe(
         tap(console.log),
+        shareReplay(),
         map((obj) => Object.values(obj))
       );
   }
 
-  update(data: Object) {
+  ngOnInit() {}
+
+  add(data: Object[]) {
     this.afs.doc('register/users/person1/date3').set(data);
   }
 
