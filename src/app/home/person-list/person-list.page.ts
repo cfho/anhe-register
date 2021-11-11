@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { AfService } from 'src/app/af.service';
@@ -13,7 +14,11 @@ export class PersonListPage implements OnInit {
   listWithStay$: Observable<Regist[]>;
   listNoStay$: Observable<Regist[]>;
 
-  constructor(private afService: AfService) {}
+  constructor(
+    private afService: AfService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.listWithStay$ = this.afService.getPersonData().pipe(
@@ -30,6 +35,11 @@ export class PersonListPage implements OnInit {
 
   onClick(data: {}) {
     console.log(data);
-    
+    if (data['act'] === 'edit') {
+      this.router.navigate(['edit/', data['id']], { relativeTo: this.route });
+    } else {
+      const path = 'register/users/person1/' + data['id'];
+      this.afService.deleteList(path);
+    }
   }
 }

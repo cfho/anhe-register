@@ -74,8 +74,10 @@ export class AddListPage implements OnInit {
     } else {
       this.form.patchValue({carNumber: ''})
     }
+    const path = 'register/users/person1/' + Date.now()
     console.log(this.form.value);
-    this.afService.add(this.form.value);
+    console.log(path);
+    this.afService.add(path, this.form.value);
     console.log("reactive form submitted");
 }
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
     component: PersonListPage
   },
   {
-    path: 'edit-list',
+    path: 'edit/:listId',
     loadChildren: () => import('./edit-list/edit-list.module').then( m => m.EditListPageModule)
   },
   {

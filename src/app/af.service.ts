@@ -58,8 +58,8 @@ export class AfService implements OnInit {
 
   ngOnInit() {}
 
-  add(data: Object[]) {
-    this.afs.doc('register/users/person1/date3').set(data);
+  add(path: string, data: Object[]) {
+    this.afs.doc(path).set(data);
   }
 
   getPersonData() {
@@ -68,4 +68,9 @@ export class AfService implements OnInit {
       .valueChanges({ idField: 'id' })
       .pipe(shareReplay());
   }
+
+  deleteList(path) {
+    this.afs.doc(path).delete();
+  }
+
 }
