@@ -17,13 +17,19 @@
     <ion-list-header>
       <ion-label>掛單行程</ion-label>
     </ion-list-header>
-    <app-dumb-list [lists]='listWithStay$ | async'></app-dumb-list>
+    <app-dumb-list
+      [lists]="listWithStay$ | async"
+      (listEvent)="onClick($event)"
+    ></app-dumb-list>
   </ion-list>
 
   <ion-list>
     <ion-list-header>
       <ion-label>當日行程</ion-label>
     </ion-list-header>
-    <app-dumb-list [lists]='listNoStay$ | async'></app-dumb-list>
+    <app-dumb-list
+      [lists]="listNoStay$ | async"
+      (listEvent)="onClick($event)"
+    ></app-dumb-list>
   </ion-list>
 </ion-content>

@@ -27,4 +27,9 @@ export class PersonListPage implements OnInit {
       })
     );
   }
+
+  onClick(data: {}) {
+    console.log(data);
+    
+  }
 }
