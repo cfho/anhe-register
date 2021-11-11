@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PersonListPageRoutingModule } from './person-list-routing.module';
 
 import { PersonListPage } from './person-list.page';
+import { DumbListComponent } from 'src/app/dumb-list/dumb-list.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { PersonListPage } from './person-list.page';
     IonicModule,
     PersonListPageRoutingModule
   ],
-  declarations: [PersonListPage]
+  declarations: [PersonListPage, DumbListComponent]
 })
 export class PersonListPageModule {}
