@@ -60,6 +60,8 @@ export class AfService implements OnInit {
 
   add(path: string, data: Object[]) {
     this.afs.doc(path).set(data);
+    console.log('add a new list!');
+    
   }
 
   getPersonData() {

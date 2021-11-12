@@ -23,12 +23,12 @@ export class PersonListPage implements OnInit {
   ngOnInit() {
     this.listWithStay$ = this.afService.getPersonData().pipe(
       map((item) => {
-        return item.filter((ele) => ele.stay === true);
+        return item.filter((ele) => ele.stay === "true");
       })
     );
     this.listNoStay$ = this.afService.getPersonData().pipe(
       map((item) => {
-        return item.filter((ele) => ele.stay !== true);
+        return item.filter((ele) => ele.stay !== "true");
       })
     );
   }

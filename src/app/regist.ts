@@ -1,5 +1,5 @@
 export interface Regist {
-    stay: boolean;
+    stay: string;
     dates: {}[];
     dropDownLocation: string;
     pickUpLocation: string;

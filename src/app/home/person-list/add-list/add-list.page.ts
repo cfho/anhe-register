@@ -8,8 +8,14 @@ import {
 } from 'ion2-calendar';
 import { ModalController } from '@ionic/angular';
 import { AfService } from 'src/app/af.service';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-list',
@@ -24,6 +30,7 @@ export class AddListPage implements OnInit {
   selectedDate;
 
   form = this.fb.group({
+    stay: ['false', Validators.required],
     dates: ['', Validators.required],
     pickUpLocation: [''],
     dropDownLocation: [''],
@@ -34,7 +41,9 @@ export class AddListPage implements OnInit {
   constructor(
     public modalController: ModalController,
     private afService: AfService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -63,21 +72,22 @@ export class AddListPage implements OnInit {
     const event: any = await calendarUi.onDidDismiss();
     const date: CalendarResult = event.data;
     this.selectedDate = date;
-    this.form.patchValue({dates: this.selectedDate})
+    this.form.patchValue({ dates: this.selectedDate });
     console.log(date);
     console.log(event);
   }
 
   onSubmit() {
-    if(this.form.value.transportation === '自行上山') {
-      this.form.patchValue({dropDownLocation: '', pickUpLocation: ''})
+    if (this.form.value.transportation === '自行上山') {
+      this.form.patchValue({ dropDownLocation: '', pickUpLocation: '' });
     } else {
-      this.form.patchValue({carNumber: ''})
+      this.form.patchValue({ carNumber: '' });
     }
-    const path = 'register/users/person1/' + Date.now()
-    console.log(this.form.value);
-    console.log(path);
+    const path = 'register/users/person1/' + Date.now();
+    // console.log(this.form.value);
+    // console.log(path);
     this.afService.add(path, this.form.value);
-    console.log("reactive form submitted");
-}
+    this.router.navigate(['../'], {relativeTo: this.route}) 
+    // console.log("reactive form submitted");
+  }
 }
