@@ -1,9 +1,9 @@
 export interface Regist {
     stay: string;
     dates: {}[];
-    dropDownLocation: string;
-    pickUpLocation: string;
+    dropDownLocation?: string;
+    pickUpLocation?: string;
     transportation: string;
-    carNumber: string;
+    carNumber?: string;
     id?: string;
 }

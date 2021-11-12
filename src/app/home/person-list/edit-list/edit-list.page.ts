@@ -15,7 +15,9 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Regist } from 'src/app/regist';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-list',
@@ -23,10 +25,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./edit-list.page.scss'],
 })
 export class EditListPage implements OnInit {
-
   pickUp$;
   dropDown$: Observable<string[]>;
   selectedDate;
+  id: string;
+  list: Regist;
 
   form = this.fb.group({
     stay: ['false', Validators.required],
@@ -43,12 +46,20 @@ export class EditListPage implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit() {
+    this.route.params.pipe(
+      map((params) => params['listId']),
+      // tap(console.log),
+      switchMap(listId => this.afService.getList(listId)),
+      tap(console.log)
+      ).subscribe(list => {
+        this.list = list;
+        this.form.patchValue(list);
+      })
     this.dropDown$ = this.afService.dropDown$;
     this.pickUp$ = this.afService.pickUp$;
-    // this.pickUp$.subscribe(data => console.log(data))
   }
 
   onSubmit() {
@@ -61,8 +72,7 @@ export class EditListPage implements OnInit {
     // console.log(this.form.value);
     // console.log(path);
     this.afService.add(path, this.form.value);
-    this.router.navigate(['../'], {relativeTo: this.route}) 
+    this.router.navigate(['../'], { relativeTo: this.route });
     // console.log("reactive form submitted");
   }
-
 }

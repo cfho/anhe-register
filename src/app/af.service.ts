@@ -75,4 +75,12 @@ export class AfService implements OnInit {
     this.afs.doc(path).delete();
   }
 
+  getList(listId: string) {
+    const path = 'register/users/person1/' + listId;
+    return this.afs
+    .doc<Regist>(path)
+    .valueChanges({ idField: 'id' })
+    .pipe(shareReplay());
+  }
+
 }
