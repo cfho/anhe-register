@@ -15,6 +15,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-list',
@@ -40,7 +41,9 @@ export class AddListPage implements OnInit {
   constructor(
     public modalController: ModalController,
     private afService: AfService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -84,6 +87,7 @@ export class AddListPage implements OnInit {
     // console.log(this.form.value);
     // console.log(path);
     this.afService.add(path, this.form.value);
+    this.router.navigate(['../'], {relativeTo: this.route}) 
     // console.log("reactive form submitted");
   }
 }
